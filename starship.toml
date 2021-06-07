@@ -92,3 +92,4 @@ format = "$all_status$ahead_behind "
 
 [username]
 show_always = true
+style_user = "209"
