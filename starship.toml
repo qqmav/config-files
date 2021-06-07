@@ -1,0 +1,74 @@
+format = """
+$battery\
+$username\
+$hostname\
+$shlvl\
+$kubernetes\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vagrant\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$custom\
+$cmd_duration\
+$time\
+$line_break\
+$lua\
+$jobs\
+$status\
+$shell\
+$character"""
+
+[cmake]
+symbol = "cmake "
+
+[[battery.display]]
+threshold = 100
+style = "yellow"
+
+[battery]
+full_symbol = " "
+charging_symbol = " "
+discharging_symbol = " "
+empty_symbol = " "
+
+[time]
+disabled = false
+use_12hr = true
+style = "yellow"
