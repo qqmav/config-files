@@ -5,6 +5,7 @@
 #define _LOWER 1
 #define _RAISE 2
 
+// Alt tab stuff
 bool is_alt_tab_active = false;
 uint16_t alt_tab_timer = 0;
 
@@ -26,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_GRV,           KC_TAB,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_GRV,           KC_BTN1,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     KC_LGUI, LOWER,   KC_SPC,                    KC_ENT,  RAISE,   KC_RALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -120,7 +121,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 void matrix_scan_user(void) {
     if (is_alt_tab_active) {
-        if (timer_elapsed(alt_tab_timer) > 1250) {
+        if (timer_elapsed(alt_tab_timer) > 500) {
             unregister_code(KC_LALT);
             is_alt_tab_active = false;
         }
