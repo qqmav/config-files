@@ -7,7 +7,6 @@
 
 // Alt tab stuff
 bool is_alt_tab_active = false;
-uint16_t alt_tab_timer = 0;
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -75,6 +74,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_on(_LOWER);
       } else {
         layer_off(_LOWER);
+        if (is_alt_tab_active) {
+            unregister_code(KC_LALT);
+            is_alt_tab_active = false;
+        }
       }
       return false;
       break;
@@ -97,7 +100,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             is_alt_tab_active = true;
             register_code(KC_LALT);
         }
-        alt_tab_timer = timer_read();
         if (clockwise) {
             tap_code16(KC_TAB);
         } else {
@@ -117,14 +119,4 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
     }
     return true;
-}
-
-void matrix_scan_user(void) {
-    if (is_alt_tab_active) {
-        if (timer_elapsed(alt_tab_timer) > 500) {
-            unregister_code(KC_LALT);
-            is_alt_tab_active = false;
-        }
-    }
-    return;
 }
