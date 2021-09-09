@@ -1,7 +1,22 @@
+set t_Co=256
+colorscheme ron
+
 " Basic configuration
 set nocompatible
 syntax enable
 filetype plugin indent on
+
+" Cursorline
+set cursorline
+hi cursorline cterm=none ctermbg=237
+
+" Statusline
+set laststatus=2
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+
+" Search case
+set ignorecase
+set smartcase
 
 " Fuzzy finding
 set path+=**
@@ -20,3 +35,5 @@ command! MakeTags !ctags -R .
 " and the rest are relative numbers
 set number
 set relativenumber
+
+set scrolloff=5
