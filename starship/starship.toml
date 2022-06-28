@@ -97,3 +97,11 @@ style_user = "209"
 [hostname]
 ssh_only = false
 style = "062"
+
+[status]
+disabled = false
+format = "[$status $symbol]($style)"
+map_symbol = true
+recognize_signal_code = true
+pipestatus = true
+symbol = ""
