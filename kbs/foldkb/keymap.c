@@ -25,9 +25,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_VOLD,          KC_LCTL, KC_LGUI, KC_LALT, KC_LGUI, MO(1),   KC_SPC,      KC_ENT,  MO(2),   KC_RALT, KC_RGUI, KC_MENU, KC_RCTL
   ),
   [1] = LAYOUT(
-    _______, _______, RGB_MOD, RGB_HUD, RGB_HUI, _______, _______, KC_LABK,     KC_RABK, KC_7,    KC_8,    KC_9,    _______, _______, _______, KC_DEL,
-    _______,          _______, RGB_SAD, RGB_SAI, _______, _______, KC_LPRN,     KC_RPRN, KC_4,    KC_5,    KC_6,    _______, _______, _______, _______,
-    _______,          _______, RGB_VAD, RGB_VAI, _______, _______, KC_LBRC,     KC_RBRC, KC_1,    KC_2,    KC_3,    KC_MINS, _______,          _______,
+    _______, _______, _______, _______, _______, _______, _______, KC_LABK,     KC_RABK, KC_7,    KC_8,    KC_9,    _______, _______, _______, KC_DEL,
+    _______,          _______, _______, KC_UP,   _______, _______, KC_LPRN,     KC_RPRN, KC_4,    KC_5,    KC_6,    _______, _______, _______, _______,
+    _______,          _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, KC_LBRC,     KC_RBRC, KC_1,    KC_2,    KC_3,    KC_MINS, _______,          _______,
     _______,          _______, _______, _______, _______, _______, KC_LCBR,     KC_RCBR, _______, KC_0,    KC_PDOT, KC_EQL,  _______, _______,
     _______,          _______, _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______, _______
   ),
@@ -45,13 +45,13 @@ uint16_t alt_tab_timer = 0;
 const uint16_t alt_tab_timeout = 1000;
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-  if (IS_LAYER_ON(2)) {
+  if (IS_LAYER_ON(1)) {
     if (clockwise) {
         tap_code16(C(KC_TAB));
     } else {
         tap_code16(S(C(KC_TAB)));
     }
-  } else {
+  } else if (IS_LAYER_ON(2)) {
     if (!is_alt_tabbing) {
       is_alt_tabbing = true;
       register_code(KC_LALT);
@@ -61,6 +61,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         tap_code(KC_TAB);
     } else {
         tap_code16(S(KC_TAB));
+    }
+  } else {
+    if (clockwise) {
+        tap_code(KC_MS_WH_DOWN);
+    } else {
+        tap_code(KC_MS_WH_UP);
     }
   }
 
