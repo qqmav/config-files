@@ -36,4 +36,8 @@ command! MakeTags !ctags -R .
 set number
 set relativenumber
 
+" Periodically reload files that have been modified on disk.
+set autoread
+au CursorHold * checktime
+
 set scrolloff=5
